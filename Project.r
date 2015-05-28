@@ -3,7 +3,7 @@ library(gplm)
 
 ####
 ker="uniform"   # quartic triweight gaussian "uniform" 
-k=30
+k=3
 ###
 # read the Patristic Distance Data
 PatricDist=read.csv(file="clostRooted_distance.csv",header=TRUE,row.names=1,check.names=FALSE)
@@ -49,7 +49,7 @@ PDM = PDM[colnames(PDM),]
 # reduce lzprofile
 lzprofile = lzprofile[rowSums(lzprofile)>=200 & rowSums(lzprofile)<=400,]  ### too much
 
-ngene = nrow(lzprofile)  # 6505
+ngene = nrow(lzprofile)  # 540/6505
 nbac = ncol(lzprofile)   # 662
 
 # end of data preprocessing
