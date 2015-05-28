@@ -1,3 +1,4 @@
+## for prepare the data (20 genes in test)
 rm(list=ls())
 lz =read.table("LZprofile.txt",header=TRUE,row.names=1)
 clostreeid=read.csv("ClosTreeID.txt",sep=",",header=FALSE)
