@@ -1,6 +1,6 @@
 ## for prepare the data (20 genes in test)
 rm(list=ls())
-lz =read.table("LZprofile.txt",header=TRUE,row.names=1)
+lz =read.table("LZprofile.txt",header=TRUE,row.names=1,check.names=FALSE)
 clostreeid=read.csv("ClosTreeID.txt",sep=",",header=FALSE)
 treegis=read.csv("TreeGIs.txt",sep=",",header=FALSE)
 Bacnames=read.csv("NewTreeNamesID.txt",sep=",",header=FALSE)
@@ -15,6 +15,7 @@ lzprofile = lz[,colnames(lz) %in% Bacnames[,1]]
 # dim(lz) 6505 860
 # dim(lzprofile) 6505 662
 
+####
 i = 0
 vector=c()
 for (id in clostreeid[,1]) {
@@ -25,6 +26,7 @@ for (id in clostreeid[,1]) {
 	}
 
 }
+### 8 gis which are in the clostree but not in treegi file 
 # m = matrix(sample(0:1,695*2, replace=TRUE),695,2)
 # testprofile = cbind(clostreeid[,1],m)
 # write.table(testprofile, "testClostree.txt", sep="\t",row.names=FALSE,col.names=FALSE)
@@ -32,6 +34,9 @@ for (id in clostreeid[,1]) {
 df=data.frame(t(Bacnames[,2]))
 colnames(df)=Bacnames[,1]
 colnames(lzprofile) = df[1,colnames(lzprofile)]
+
+lzprofile[lzprofile>0]=1
+
 
 lzcol = colnames(lzprofile)
 i = 0
@@ -46,13 +51,13 @@ for (id in clostreeid[,1]) {
 }
 
 ################## for one pair ##########
-m = matrix(0,33,2)
+m = matrix(0,33,2)  # no need
 missprofile = cbind(vector,m)
 dfmissprofile=missprofile[,2:3]
 rownames(dfmissprofile)=missprofile[,1]
 # the bacs on the tree can't be found in profile
 # gene loop 6000 * (6000-1)
-gpair=c("496549815", "511538055")
+# gpair=c("496549815", "511538055")
 # only 0 1
 lzprofile[lzprofile>0]=1
 pairprofile=lzprofile[gpair,]
@@ -80,6 +85,9 @@ with open("pairprofile.txt.log.txt",'r') as f :
  for line in f:
      pass
 line.split()[1]
+
+
+
 
 
 
